@@ -1,23 +1,44 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# ===============================================
+# SECRETS - Most Important!
+# ===============================================
+# Environment variables containing secrets like DB passwords
+.env
+*.env
 
-### STS ###
+
+# ===============================================
+# BUILD & DEPENDENCIES
+# ===============================================
+# Maven build output directory
+/target/
+
+# Log files
+*.log
+logs/
+
+# Maven wrapper jar
+# The .mvn/wrapper/maven-wrapper.properties file IS committed, but the jar is not.
+.mvn/wrapper/maven-wrapper.jar
+
+
+# ===============================================
+# IDE-SPECIFIC FILES
+# ===============================================
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### STS / Eclipse ###
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+.sts4-cache/
 
 ### NetBeans ###
 /nbproject/private/
@@ -26,8 +47,16 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+
+# ===============================================
+# OS-SPECIFIC FILES
+# ===============================================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
