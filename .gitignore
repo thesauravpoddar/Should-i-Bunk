@@ -2,7 +2,8 @@
 # SECRETS - Most Important!
 # ===============================================
 # Environment variables containing secrets like DB passwords
-.env
+credentials.env
+credentials.env.txt
 *.env
 
 
