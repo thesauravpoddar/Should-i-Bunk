@@ -2,6 +2,7 @@ package com.should_i_bunk.should_i_bunk.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.security.PrivateKey;
@@ -41,7 +42,7 @@ public class JwtService {
         this.publicKey = KeyUtils.loadPublicKey("keys/local-only/public_key.pem");
     }
 
-    public String generateToken(final String username) {
+    public String generateAccessToken(final String username) {
         final Map<String , Object> claims = Map.of(TOKEN_TYPE, "ACCESS_TOKEN");
         return buildToken(username , claims, accessTokenExpiration);
     }
@@ -71,7 +72,7 @@ public class JwtService {
 
         final String username = extractUsername(token); //Hey we are gonna, extract the username that we will compare with our expected username.
         return username.equals(expectedUsername) && !isTokenExpired(token); // it says that Whether the username that we entered is equal to the are expected username and checking that is token expired or not
-        
+
     }
 
     private boolean isTokenExpired(final String token) {

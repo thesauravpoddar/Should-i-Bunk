@@ -41,6 +41,11 @@ public class User implements UserDetails {
     @Column(name = "ENABLED")
     private boolean enabled;
 
+    @Column(name = "IS_ACCOUNT_LOCKED")
+    private boolean locked;
+    @Column(name = "IS_CRENDETIAL_EXPIRED")
+    private boolean credentialsExpired;
+
     @Column(name = "ENABLED_AT")
     private LocalDateTime createdAt;
 
@@ -52,10 +57,10 @@ public class User implements UserDetails {
     )
     @JoinTable(name = "USERS_ROLES" , joinColumns =
             {
-                    @JoinColumn(name = "Users_ID")
+                    @JoinColumn(name = "users_id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "ROLES_ID")
+                    @JoinColumn(name = "roles_id")
             }
     )
     private List<Role> roles;

@@ -6,12 +6,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
+@Setter
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,11 +22,9 @@ import java.util.Set;
 @Table(name = "ROLES")
 @Entity
 public class Role extends BaseEntity {
-
-
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
-
+    private List<User> users;
 }

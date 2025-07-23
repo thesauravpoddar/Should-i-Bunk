@@ -3,24 +3,37 @@ package com.should_i_bunk.should_i_bunk.exceptionHandling;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Getter
 public enum ErrorCode {
-USER_NOT_FOUND("USER_NOT_FOUND", "User not found with id %s", NOT_FOUND),
-    CHANGE_PASSWORD_MISMATCH("CHANGE_PASSWORD_MISMATCH","new password and confirm new password are not same" ,BAD_REQUEST ),
-    INVALID_OLD_PASSWORD("INVALID_OLD_PASSWORD","Old password is wrong" , BAD_REQUEST ),
-    ACCOUNT_ALREADY_DEACTIVATED("ACCOUNT_ALREADY_DEACTIVATED","account already deactivated" , BAD_REQUEST);
 
+
+    EMAIL_ALREADY_EXISTS("ERR_EMAIL_EXISTS", "Email already exists", CONFLICT),
+    PASSWORD_MISMATCH("ERR_PASSWORD_MISMATCH", "The password and confirmation do not match", BAD_REQUEST),
+    CHANGE_PASSWORD_MISMATCH("ERR_PASSWORD_MISMATCH", "New password and confirmation do not match", BAD_REQUEST),
+
+    ERR_USER_DISABLED("ERR_USER_DISABLED",
+            "User account is disabled, please activate your account or contact the administrator",
+            UNAUTHORIZED),
+    INVALID_OLD_PASSWORD("INVALID_OLD_PASSWORD", "The old password is incorrect", BAD_REQUEST),
+    USER_NOT_FOUND("USER_NOT_FOUND", "User not found", NOT_FOUND),
+    ACCOUNT_ALREADY_DEACTIVATED("ACCOUNT_ALREADY_DEACTIVATED", "Account has been deactivated", BAD_REQUEST),
+    BAD_CREDENTIALS("BAD_CREDENTIALS", "Username and / or password is incorrect", UNAUTHORIZED),
+    INTERNAL_EXCEPTION("INTERNAL_EXCEPTION",
+            "An internal exception occurred, please try again or contact the admin",
+            HttpStatus.INTERNAL_SERVER_ERROR),
+    USERNAME_NOT_FOUND("USERNAME_NOT_FOUND", "Cannot find user with the provided username", NOT_FOUND),;
 
     private final String code;
     private final String defaultMessage;
-    private final HttpStatus Status;
+    private final HttpStatus status;
 
-    ErrorCode(String code, String defaultMessage, HttpStatus status) {
+    ErrorCode(final String code,
+              final String defaultMessage,
+              final HttpStatus status) {
         this.code = code;
         this.defaultMessage = defaultMessage;
-        Status = status;
+        this.status = status;
     }
 }

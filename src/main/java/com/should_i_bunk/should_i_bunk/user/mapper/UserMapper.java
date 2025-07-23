@@ -1,5 +1,6 @@
 package com.should_i_bunk.should_i_bunk.user.mapper;
 
+import com.should_i_bunk.should_i_bunk.auth.request.RegistrationRequest;
 import com.should_i_bunk.should_i_bunk.user.User;
 import com.should_i_bunk.should_i_bunk.user.request.ProfileUpdateRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -36,5 +37,21 @@ public class UserMapper {
             saveduser.setLastName(request.getLastName());
         }
 
+
+
     }
+
+    public User toUser(final RegistrationRequest request) {
+        return User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .enabled(true)
+                .locked(false)
+                .credentialsExpired(false)
+                .build();
+    }
+
+
 }
